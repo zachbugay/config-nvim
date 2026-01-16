@@ -252,6 +252,7 @@ return {
         terraformls = {},
         tombi = {},
       },
+      -- For LSPs installed outside of Mason.
       others = {},
     }
     -- Ensure the servers and tools above are installed
@@ -287,7 +288,6 @@ return {
 
     ---@type string[]
     ensure_installed = vim.tbl_filter(remove_x86_only_if_arm_processor, ensure_installed)
-
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed, auto_update = true })
 
     -- Either merge all additional server configs from the `servers.mason` and `servers.others` tables
@@ -301,7 +301,7 @@ return {
 
     -- After configuring, we now enable them.
     require("mason-lspconfig").setup({
-      ---  ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+      ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
       automatic_enable = true,
     })
 

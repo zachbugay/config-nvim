@@ -31,7 +31,11 @@ return {
     "folke/lazydev.nvim",
   },
   event = "VimEnter",
-  version = "1.*",
+  -- This works on macOS
+  -- version = "1.*",
+  -- Build and Branch work on windows... Hrm
+  branch = "main",
+  build = "rustup run nightly cargo build --release",
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
   opts = {
