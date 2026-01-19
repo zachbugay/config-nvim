@@ -22,7 +22,7 @@ return {
     },
     -- I believe these will be setup after neovim/nvim-lspconfig is setup because they do not have opt
     "mason-org/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    "zachbugay/mason-tool-installer.nvim",
 
     -- Useful status updates for LSP.
     { "j-hui/fidget.nvim", branch = "main", opts = {} }, -- Bleeding edge
