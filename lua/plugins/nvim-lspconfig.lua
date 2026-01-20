@@ -282,7 +282,10 @@ return {
     ---@type MasonToolEntry[]
     local ensure_installed = {}
     if vim.uv.os_uname().machine == "unknown" then
-      print("Machine is unknown. Defaulting to windows x64")
+      vim.api.nvim_echo({
+        { "Machine is unknown. Defaulting to windows x64", "WarningMsg" },
+      }, true, {})
+
       ensure_installed = {
         "bicep",
         { "clangd", target = "win_x64" },

@@ -49,6 +49,15 @@ return {
       end,
     })
 
+    -- Do not install and build parsers if the machine is unknown. Just use the defaults, and not nvim-treesitter.
+    if vim.uv.os_uname().machine == "unknown" then
+      vim.api.nvim_echo({
+        { "Machine is unknown. Do not install and build parsers.", "WarningMsg" },
+      }, true, {})
+
+      return
+    end
+
     -- ensure basic parser are installed
     local parsers =
       { "bash", "c", "diff", "html", "lua", "luadoc", "markdown", "markdown_inline", "query", "vim", "vimdoc" }
