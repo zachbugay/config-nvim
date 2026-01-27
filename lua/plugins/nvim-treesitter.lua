@@ -18,7 +18,6 @@ return {
       -- enables treesitter based folds
       -- for more info on folds see `:help folds`
       vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
       -- enables treesitter based indentation
       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
@@ -35,8 +34,6 @@ return {
         local installed_parsers = require("nvim-treesitter").get_installed("parsers")
 
         if vim.tbl_contains(installed_parsers, language) then
-          -- enable the parser if it is installed
-          -- treesitter_try_attach(buf, language)
           -- if a parser is available in `nvim-treesitter` enable it after ensuring it is installed
           require("nvim-treesitter").install(language):await(function()
             treesitter_try_attach(buf, language)
@@ -51,10 +48,13 @@ return {
     -- ensure basic parser are installed
     local parsers = {
       "bash",
+      "bicep",
       "c",
+      "css",
       "c_sharp",
       "diff",
       "dockerfile",
+      "gotmpl",
       "html",
       "lua",
       "luadoc",
@@ -62,8 +62,16 @@ return {
       "markdown_inline",
       "powershell",
       "query",
+      "razor",
+      "sql",
+      "ssh_config",
+      "terraform",
+      "toml",
+      "typescript",
       "vim",
       "vimdoc",
+      "xml",
+      "yaml",
       "zsh",
     }
     require("nvim-treesitter").install(parsers)

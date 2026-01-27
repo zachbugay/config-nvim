@@ -13,12 +13,12 @@ mySysInfo:useWindowsShell()
 -- print("mySysInfo.processor_architecture: " .. mySysInfo.processor_architecture)
 -- print(vim.print(vim.uv.os_uname()))
 
--- [[ Setup my options, keymaps and other custom settings. ]]
+-- [[ NOTE: Setup my options, keymaps and other custom settings. ]]
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
 require("config.diagnostic")
--- [[ Install `lazy.nvim` plugin manager ]]
+-- [[ NOTE: Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 require("config.lazy")
 
