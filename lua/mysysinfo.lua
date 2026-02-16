@@ -38,8 +38,8 @@ function SystemInfo:useWindowsShell()
     vim.o.shell = "pwsh.exe"
     vim.o.shellcmdflag =
       "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$PSStyle.Formatting.Error = '';$PSStyle.Formatting.ErrorAccent = '';$PSStyle.Formatting.Warning = '';$PSStyle.OutputRendering = 'PlainText';"
-    vim.o.shellredir = "2>&1 | Out-File -Encoding utf8 %s; exit $LastExitCode"
-    vim.o.shellpipe = "2>&1 | Out-File -Encoding utf8 %s; exit $LastExitCode"
+    vim.o.shellredir = "2>&1 | Out-File -Encoding utf8 %s; exit $LASTEXITCODE"
+    vim.o.shellpipe = "2>&1 | Out-File -Encoding utf8 %s; exit $LASTEXITCODE"
     vim.o.shellquote = ""
     vim.o.shellxquote = ""
   end

@@ -289,7 +289,7 @@ return {
     ---@module "mason-tool-installer"
     ---@type MasonToolEntry[]
     local ensure_installed = {}
-    if vim.uv.os_uname().machine == "unknown" then
+    if vim.uv.os_uname().machine == "arm64" then
       vim.api.nvim_echo({
         { "Machine is unknown. Defaulting to windows x64", "WarningMsg" },
       }, true, {})
