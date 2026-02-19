@@ -51,7 +51,7 @@ return {
       jsonc = { "prettier", name = "dprint" },
       lua = { "stylua" },
       markdown = { "prettier" },
-      ps1 = { "prettier", name = "dprint" },
+      -- ps1 = { "prettier", name = "dprint" },
       scss = { "prettier" },
       sh = { "shfmt" },
       terraform = { "terraform_fmt" },
