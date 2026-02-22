@@ -25,7 +25,11 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Close current buffer
-vim.keymap.set('n', '<leader>Q', ':bd<CR>', { desc = "Close current buffer."})
+vim.keymap.set("n", "<leader>Q", ":bd<CR>", { desc = "Close current buffer." })
+vim.keymap.set("n", "<leader>nb", ":vs<CR>", { desc = "Creates a [n]ew vertical [b]uffer." })
+
+-- Tabs
+vim.keymap.set("n", "<leader>nt", ":tabe<CR>", { desc = "Creates a [n]ew [t]ab." })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -47,4 +51,3 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
-
