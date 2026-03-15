@@ -289,7 +289,7 @@ return {
     ---@module "mason-tool-installer"
     ---@type MasonToolEntry[]
     local ensure_installed = {}
-    if vim.uv.os_uname().machine == "arm64" then
+    if vim.uv.os_uname().sysname == "Windows_NT" and vim.uv.os_uname().machine == "arm64" then
       -- TODO: Rather than this, I should have some retry logic. First, try for arm64. Then try x64
       vim.api.nvim_echo({
         { "Machine is arm64. Defaulting to windows x64", "WarningMsg" },
