@@ -129,4 +129,4 @@ vim.o.autoindent = true
 vim.o.autowrite = true
 
 vim.o.colorcolumn = "120"
-vim.o.ff = "unix"
+vim.o.fileformat = "unix"

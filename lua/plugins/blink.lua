@@ -25,6 +25,9 @@ return {
       },
       opts = {},
     },
+    {
+      "saghen/blink.lib",
+    },
   },
   event = "VimEnter",
   branch = "main",
