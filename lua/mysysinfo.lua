@@ -35,16 +35,18 @@ end
 
 function SystemInfo:useWindowsShell()
   if self.os_type == "windows" then
-    -- I might have installed PowerShell via the MSIX Bundle. If so, it uses something called App Execution Alias. 
+    -- I might have installed PowerShell via the MSIX Bundle. If so, it uses something called App Execution Alias.
     -- The path will show a 0 byte exe. I need to find the actual exe, not an alias.
     -- This is the command you can use to find the true installation location of my PowerShell
     local system_call = vim.system(
-      { 'pwsh', '-NoProfile', '-NoLogo', '-Command', '(Get-AppxPackage -Name Microsoft.PowerShell).InstallLocation' },
-      { text = true })
+      { "pwsh", "-NoProfile", "-NoLogo", "-Command", "(Get-AppxPackage -Name Microsoft.PowerShell).InstallLocation" },
+      { text = true }
+    )
     local result = system_call:wait()
-    local pwsh_path = vim.fs.joinpath(vim.trim(result.stdout), 'pwsh.exe')
+    local pwsh_path = vim.fs.joinpath(vim.trim(result.stdout), "pwsh.exe")
 
-    vim.o.shell = '"'.. pwsh_path .. '"'
+    -- There is a space in the path, so enclose it with quotes.
+    vim.o.shell = string.format('"%s"', pwsh_path)
     vim.o.shellcmdflag =
       "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$PSStyle.Formatting.Error = '';$PSStyle.Formatting.ErrorAccent = '';$PSStyle.Formatting.Warning = '';$PSStyle.OutputRendering = 'PlainText';"
     vim.o.shellredir = "2>&1 | Out-File -Encoding utf8 %s; exit $LASTEXITCODE"
