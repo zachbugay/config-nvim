@@ -265,6 +265,7 @@ return {
         prettier = {},
         roslyn = {},
         terraformls = {},
+        markdownlint = {},
         tombi = {},
         shfmt = {},
         stylua = {},
