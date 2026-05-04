@@ -31,36 +31,6 @@ return {
     { "saghen/blink.cmp" },
   },
   config = function()
-    -- Brief aside: **What is LSP?**
-    --
-    -- LSP is an initialism you've probably heard, but might not understand what it is.
-    --
-    -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-    -- and language tooling communicate in a standardized fashion.
-    --
-    -- In general, you have a "server" which is some tool built to understand a particular
-    -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-    -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-    -- processes that communicate with some "client" - in this case, Neovim!
-    --
-    -- LSP provides Neovim with features like:
-    --  - Go to definition
-    --  - Find references
-    --  - Autocompletion
-    --  - Symbol Search
-    --  - and more!
-    --
-    -- Thus, Language Servers are external tools that must be installed separately from
-    -- Neovim. This is where `mason` and related plugins come into play.
-    --
-    -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-    -- and elegantly composed help section, `:help lsp-vs-treesitter`
-    -- vim.api.vim_create_autocmd allows you to run a callback function when an event happens.
-    -- First, define the event (in this case LspAttach) and then what call back you want to run.
-    --  This function gets run when an LSP attaches to a particular buffer.
-    --    That is to say, every time a new file is opened that is associated with
-    --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-    --    function will be executed to configure the current buffer
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
       callback = function(event)
@@ -193,104 +163,40 @@ return {
         end,
       },
     })
-
-    -- LSP servers and clients are able to communicate to each other what features they support.
-    --  By default, Neovim doesn't support everything that is in the LSP specification.
-    --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
-    --
-    -- Enable the following language servers
-    --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-    --
-    --  Add any additional override configuration in the following tables. Available keys are:
-    --  - cmd (table): Override the default command used to start the server
-    --  - filetypes (table): Override the default list of associated filetypes for the server
-    --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-    --  - settings (table): Override the default settings passed when initializing the server.
-    --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-    -- These are the names of the LSPs in nvim-lspconfig, not mason.
-    -- vim.lsp.config
+    -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
     ---@class LspServersConfig
     ---@field mason table<string, vim.lsp.Config>
     local servers = {
       mason = {
-        bicep = {},
-        clangd = {
-          cmd = {
-            "clangd",
-            "--clang-tidy", -- Enable clang tidy diagnostics.
-            "--background-index",
-            "--offset-encoding=utf-8",
-            "--enable-config",
-          },
-        },
-        codebook = {},
-        docker_language_server = {},
-        dprint = {
-          settings = {
-            config = vim.fs.joinpath(vim.uv.os_homedir(), ".config", "dprint", "dprint.jsonc"),
-          },
-        },
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        bicep = {},
+        clangd = {},
+        codebook = {},
+        cssls = {},
+        docker_language_server = {},
+        dprint = {},
+        eslint_d = {},
         harper_ls = {},
-        lua_ls = {
-          cmd = { "lua-language-server" },
-          -- filetypes = { ... },
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = "Replace",
-              },
-              workspace = {
-                library = vim.api.nvim_get_runtime_file("", true), --Include runtime files
-                checkThirdParty = false,
-              },
-              -- You can toggle below to ignore lua_ls's noisy `missing-fields` warnings
-              diagnostics = {
-                globals = { "vim" },
-                -- disable = { "missing-fields" },
-              },
-            },
-          },
-        },
-        prettier = {},
-        roslyn = {},
-        terraformls = {},
+        lua_ls = {},
         markdownlint = {},
-        tombi = {},
+        roslyn = {
+          registry = "github:Crashdummyy/mason-registry",
+        },
         shfmt = {},
         stylua = {},
+        terraformls = {},
+        tombi = {},
+        tsgo = {},
       },
     }
 
-    -- Ensure the servers and tools above are installed
-    --
-    -- To check the current status of installed tools and/or manually install
-    -- other tools, you can run
-    --    :Mason
-    --
-    -- You can press `g?` for help in this menu.
-    --
-    -- `mason` had to be setup earlier: to configure its options see the
-    -- `dependencies` table for `nvim-lspconfig` above.
-    --
-    -- You can add other tools here that you want Mason to install
-    -- for you, so that they are available from within Neovim.
-
-    -- I have a difference here that I need to account for if I am on a win_arm64 pc.
     ---@module "mason-tool-installer"
     ---@type MasonToolEntry[]
     local ensure_installed = {}
-    if vim.uv.os_uname().sysname == "Windows_NT" and vim.uv.os_uname().machine == "arm64" then
+    local env_info = vim.uv.os_uname()
+    if env_info.sysname == "Windows_NT" and env_info.machine == "arm64" then
       -- TODO: Rather than this, I should have some retry logic. First, try for arm64. Then try x64
       vim.api.nvim_echo({
         { "Machine is arm64. Defaulting to windows x64", "WarningMsg" },
@@ -301,9 +207,8 @@ return {
         { "codebook", target = "win_x64" },
         { "harper_ls", target = "win_x64" },
         { "lua_ls", target = "win_x64" },
-        { "roslyn", target = "win_x64" },
         { "terraformls", target = "win_arm64" },
-        { "prettier" },
+        { "prettierd" },
         -- { "tombi" }, -- Not installing for some reason.
         { "stylua", target = "win_x64" },
       }

@@ -25,39 +25,20 @@ return {
         lsp_format = "fallback",
       }
     end,
-    formatters = {
-      prettier = {
-        require_cwd = false,
-        append_args = function(self, ctx)
-          local ft = vim.bo[ctx.buf].filetype
-          local path = vim.fs.joinpath(vim.uv.os_homedir(), ".config", "prettier", ".prettierrc.yaml")
-          if ft == "ps1" then
-            return { "--config", path }
-          end
-          return {}
-        end,
-        options = {
-          ext_parsers = {
-            ps1 = "powershell",
-          },
-        },
-      },
-    },
     formatters_by_ft = {
       ["_"] = { "trim_whitespace" },
-      javascript = { "prettier", name = "dprint" },
-      javascriptreact = { "prettier", name = "dprint" },
-      json = { "prettier", name = "dprint" },
-      jsonc = { "prettier", name = "dprint" },
+      javascript = { name = "dprint" },
+      javascriptreact = { name = "dprint" },
+      json = { name = "dprint" },
+      jsonc = { name = "dprint" },
       lua = { "stylua" },
-      markdown = { "prettier" },
-      -- ps1 = { "prettier", name = "dprint" },
-      scss = { "prettier" },
+      markdown = { "dprint" },
+      scss = { "dprint" },
       sh = { "shfmt" },
       terraform = { "terraform_fmt" },
-      typescript = { "prettier", name = "dprint" },
-      typescriptreact = { "prettier", name = "dprint" },
-      yaml = { "prettier" },
+      typescript = { name = "dprint" },
+      typescriptreact = { name = "dprint" },
+      yaml = { "dprint" },
     },
   },
 }

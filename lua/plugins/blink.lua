@@ -1,49 +1,31 @@
 -- Autocompletion
 return {
   "saghen/blink.cmp",
-  dependencies = {
-    -- Snippet Engine
-    {
-      "L3MON4D3/LuaSnip",
-      version = "2.*",
-      build = (function()
-        -- Build Step is needed for regex support in snippets.
-        -- This step is not supported in many windows environments.
-        -- Remove the below condition to re-enable on windows.
-        if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-          return
-        end
-        return "make install_jsregexp"
-      end)(),
-      dependencies = {
-        {
-          "rafamadriz/friendly-snippets",
-          config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-          end,
-        },
-      },
-      opts = {},
-    },
-    {
-      "saghen/blink.lib",
-    },
-  },
   event = "VimEnter",
   branch = "main",
+  dependencies = {
+    "saghen/blink.lib",
+    "rafamadriz/friendly-snippets",
+  },
+  ---@param plugin LazyPlugin
   build = function(plugin)
     if vim.uv.os_uname().sysname ~= "Windows_NT" then
-      local on_exit = function(obj)
-        if obj.code == 0 then
+      ---@param out vim.SystemCompleted
+      local on_exit = function(out)
+        if out.code == 0 then
           return
         end
-        print(obj.code)
-        print(obj.signal)
-        print(obj.stdout)
-        print(obj.stderr)
+        print(out.code)
+        print(out.signal)
+        print(out.stdout)
+        print(out.stderr)
       end
       -- Runs asynchronously:
-      vim.system({ "rustup", "run", "nightly", "cargo", "build", "--release" }, { cwd = plugin.dir }, on_exit)
+      -- vim.system({ "rustup", "run", "nightly", "cargo", "build", "--release" }, { cwd = plugin.dir }, on_exit)
+
+      ---@module "blink.cmp"
+      ---@type "blink.cmp.API"
+      require("blink.cmp").build():wait(60000)
       return
     end
 
@@ -156,7 +138,7 @@ return {
     --
     -- See :h blink-cmp-config-fuzzy for more information
     fuzzy = {
-      implementation = "prefer_rust_with_warning",
+      implementation = "rust",
     },
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },
