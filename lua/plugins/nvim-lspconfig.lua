@@ -208,7 +208,9 @@ return {
         { "harper_ls", target = "win_x64" },
         { "lua_ls", target = "win_x64" },
         { "terraformls", target = "win_arm64" },
-        { "prettierd" },
+        roslyn = {
+          registry = "github:Crashdummyy/mason-registry",
+        },
         -- { "tombi" }, -- Not installing for some reason.
         { "stylua", target = "win_x64" },
       }
