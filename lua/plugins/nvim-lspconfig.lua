@@ -172,7 +172,6 @@ return {
         -- pyright = {},
         -- rust_analyzer = {},
         bicep = {},
-        clangd = {},
         codebook = {},
         cssls = {},
         docker_language_server = {},
