@@ -14,34 +14,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Highlighting for files
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  desc = "Determine the highlight of a file that might be a go template.",
+  desc = "Determine the highlight of a file that is a go template.",
   group = vim.api.nvim_create_augroup("bugay-buffer-highlight", { clear = true }),
   callback = function(args)
     local buffer_number = args.buf
     local file_name = vim.fn.expand("%")
 
-    local my_detections = {
-      {
-        detections = { "zsh", "zprofile" },
-        file_type = "zsh",
-      },
-      {
-        detections = { "ps1", "powershell" },
-        file_type = "ps1",
-      },
-      {
-        detections = { "mk" },
-        file_type = "make",
-      },
-    }
+    local tmp_exts = { "tmp", "tmpl", "bak" }
 
-    for _, detection in ipairs(my_detections) do
-      if type(detection.detections) == "table" then
-        for _, d in ipairs(detection.detections) do
-          if string.find(file_name, d) then
-            vim.bo.filetype = detection.file_type
-          end
-        end
+    for _, ext in ipairs(tmp_exts) do
+      if file_name:match("%." .. ext .. "$") then
+        local base, ext1, ext2 = file_name:match("^(.+)%.(.+)%.(.+)$")
+        vim.bo[buffer_number].filetype = ext1
+        break
       end
     end
   end,
