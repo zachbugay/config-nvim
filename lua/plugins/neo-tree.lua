@@ -15,9 +15,10 @@ return {
   ---@type neotree.Config
   opts = {
     close_if_last_window = true,
-    popup_border_style = "NC",
+    popup_border_style = "rounded",
     enable_git_status = true,
-    enable_diagnostics = true,
+    enable_diagnostics = false,
+    enable_refresh_on_write = true,
     filesystem = {
       filtered_items = {
         never_show = {
@@ -26,6 +27,7 @@ return {
         visible = true,
         hide_hidden = false,
       },
+      async_directory_scan = "auto",
       window = {
         mappings = {
           ["\\"] = "close_window",
