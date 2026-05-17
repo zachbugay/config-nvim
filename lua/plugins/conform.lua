@@ -36,6 +36,7 @@ return {
       scss = { "dprint" },
       sh = { "shfmt" },
       terraform = { "terraform_fmt" },
+      toml = { "dprint" },
       typescript = { name = "dprint" },
       typescriptreact = { name = "dprint" },
       yaml = { "dprint" },

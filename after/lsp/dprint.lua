@@ -8,6 +8,7 @@ return {
     "json",
     "jsonc",
     "markdown",
+    "toml",
     "typescript",
     "typescriptreact",
   },
