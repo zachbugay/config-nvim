@@ -60,6 +60,7 @@ return {
 
     -- ensure basic parser are installed
     local parsers = {
+      "astro",
       "bash",
       "bicep",
       "c",

@@ -171,6 +171,7 @@ return {
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
+        astro = {},
         bicep = {},
         codebook = {},
         cssls = {},
