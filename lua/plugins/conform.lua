@@ -25,9 +25,14 @@ return {
         lsp_format = "fallback",
       }
     end,
+    formatters = {
+      dprint = {
+        prepend_args = { "--config-discovery=global" },
+      },
+    },
     formatters_by_ft = {
       ["_"] = { "trim_whitespace" },
-      astro = { name = "dprint" },
+      astro = { "dprint" },
       javascript = { name = "dprint" },
       javascriptreact = { name = "dprint" },
       json = { name = "dprint" },
