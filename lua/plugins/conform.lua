@@ -39,6 +39,7 @@ return {
       jsonc = { name = "dprint" },
       lua = { "stylua" },
       markdown = { "dprint" },
+      css = { "dprint" },
       scss = { "dprint" },
       sh = { "shfmt" },
       terraform = { "terraform_fmt" },
