@@ -33,6 +33,7 @@ return {
     formatters_by_ft = {
       ["_"] = { "trim_whitespace" },
       astro = { "dprint" },
+      cs = { "dprint" },
       javascript = { name = "dprint" },
       javascriptreact = { name = "dprint" },
       json = { name = "dprint" },
