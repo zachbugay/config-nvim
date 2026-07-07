@@ -7,3 +7,4 @@ space_after_function_names = "Never"
 
 [sort_requires]
 enabled = true
+
