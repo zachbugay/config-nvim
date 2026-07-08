@@ -189,6 +189,7 @@ return {
         terraformls = {},
         tombi = {},
         tsgo = {},
+        yamlls = {},
       },
     }
 
