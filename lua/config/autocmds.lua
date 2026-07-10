@@ -20,11 +20,15 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     local buffer_number = args.buf
     local file_name = vim.fn.expand("%")
 
-    local tmp_exts = { "tmp", "tmpl", "bak" }
+    local tmp_exts = { "tmp", "bak" }
 
     for _, ext in ipairs(tmp_exts) do
       if file_name:match("%." .. ext .. "$") then
         local base, ext1, ext2 = file_name:match("^(.+)%.(.+)%.(.+)$")
+        -- Some files only have .tmpl, and these should be ignored.
+        if string.find(ext1, "/") then
+          break
+        end
         vim.bo[buffer_number].filetype = ext1
         break
       end
