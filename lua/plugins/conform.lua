@@ -18,7 +18,7 @@ return {
   opts = {
     notify_on_error = false,
     notify_no_formatters = true,
-    log_level = vim.log.levels.DEBUG,
+    log_level = vim.log.levels.ERROR,
     format_on_save = function(bufnr)
       return {
         timeout_ms = 1000,

@@ -13,7 +13,7 @@ return {
       ---@module 'mason.settings'
       ---@type MasonSettings
       opts = {
-        log_level = vim.log.levels.DEBUG,
+        log_level = vim.log.levels.ERROR,
         registries = {
           "github:mason-org/mason-registry",
           "github:Crashdummyy/mason-registry",
