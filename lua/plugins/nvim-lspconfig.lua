@@ -188,14 +188,7 @@ return {
         stylua = {},
         terraformls = {},
         tombi = {},
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
         tsc = {},
-        yamlls = {},
-=======
->>>>>>> Stashed changes
-        tsgo = {},
         yamlls = {
           schemaStore = {
             enable = true,
@@ -209,10 +202,6 @@ return {
             ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
           },
         },
-<<<<<<< Updated upstream
-=======
->>>>>>> ff7d1a7a97a4adf6ec747b707d0885c76f768afb
->>>>>>> Stashed changes
       },
     }
 
