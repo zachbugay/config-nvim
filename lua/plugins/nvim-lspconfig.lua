@@ -175,6 +175,7 @@ return {
         bicep = {},
         codebook = {},
         cssls = {},
+        csharpier = {},
         docker_language_server = {},
         dprint = {},
         eslint_d = {},
