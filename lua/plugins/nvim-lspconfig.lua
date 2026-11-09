@@ -163,6 +163,8 @@ return {
         end,
       },
     })
+    -- TODO: There is a difference between formatters, and LSPs.
+    -- Right now my `servers` is a mixture of both. I want to separate these out.
     -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
     ---@class LspServersConfig
     ---@field mason table<string, vim.lsp.Config>

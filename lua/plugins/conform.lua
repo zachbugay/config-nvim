@@ -18,7 +18,7 @@ return {
   opts = {
     notify_on_error = false,
     notify_no_formatters = true,
-    log_level = vim.log.levels.ERROR,
+    log_level = vim.log.levels.DEBUG,
     format_on_save = function(bufnr)
       return {
         timeout_ms = 1000,
@@ -38,12 +38,12 @@ return {
       javascriptreact = { name = "dprint" },
       json = { name = "dprint" },
       jsonc = { name = "dprint" },
-      lua = { "stylua" },
+      lua = { "dprint" },
       markdown = { "dprint" },
       css = { "dprint" },
       scss = { "dprint" },
-      sh = { "shfmt" },
-      terraform = { "terraform_fmt" },
+      sh = { "dprint" },
+      terraform = { "dprint" },
       toml = { "dprint" },
       typescript = { name = "dprint" },
       typescriptreact = { name = "dprint" },
