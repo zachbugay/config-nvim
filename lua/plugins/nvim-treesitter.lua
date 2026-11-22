@@ -71,7 +71,7 @@ return {
       "css",
       "diff",
       "dockerfile",
-      "editconfig",
+      "editorconfig",
       "gitcommit",
       "git_config",
       "go",
